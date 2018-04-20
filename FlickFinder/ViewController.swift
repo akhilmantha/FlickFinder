@@ -98,9 +98,26 @@ class ViewController: UIViewController {
     
     private func displayImageFromFlickrBySearch(_ methodParameters: [String: AnyObject]) {
         
-        print(flickrURLFromParameters(methodParameters))
         
         // TODO: Make request to Flickr!
+        let session = URLSession.shared
+        let request = URLRequest(url: flickrURLFromParameters(methodParameters))
+        print(flickrURLFromParameters(methodParameters))
+        
+        let task = session.dataTask(with: request) { (data,response, error) in
+            //if an error print in the lldb
+            
+            func displayError(_error:String){
+                print(error)
+                
+                performUIUpdatesOnMain {
+                    self.setU
+                }
+                
+                
+            }
+            
+        }
     }
     
     // MARK: Helper for Creating a URL from Parameters
@@ -120,7 +137,7 @@ class ViewController: UIViewController {
         
         return components.url!
     }
-}
+
 
 // MARK: - ViewController: UITextFieldDelegate
 
